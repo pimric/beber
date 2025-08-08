@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubert de la Campagne - Prototype UX Optimisé</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Montserrat, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.68;
+            color: #333;
+            background: #fff;
+        }
+
+        /* Variables de couleurs du site original */
+        :root {
+            --primary-color: #eb2188;
+            --secondary-color: #8B4513;
+            --footer-bg: #080a52;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+        }
+
+        /* Top Header */
+        .top-header {
+            background: #2c2c2c;
+            padding: 0.5rem 0;
+            font-size: 11px;
+        }
+
+        .top-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: right;
+        }
+
+        .top-header a {
+            color: #ccc;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        .top-header a:hover {
+            text-decoration: underline;
+        }
+
+        /* Header Principal */
+        .main-header {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 60px;
+            margin-right: 1rem;
+        }
+
+        .logo-text {
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .header-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-selector label {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .village-select {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            min-width: 200px;
+        }
+
+        .btn-search {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.3s;
+        }
+
+        .btn-search:hover {
+            background: #d01070;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c5530 0%, #4a7c4e 100%);
+            padding: 4rem 1rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-selector {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .hero-selector h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .selector-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .selector-group select {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .selector-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: #d01070;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(235, 33, 136, 0.3);
+        }
+
+        .hero-badge {
+            margin-top: 1.5rem;
+            padding: 0.8rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .hero-badge a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Trust Section */
+        .trust-section {
+            padding: 3rem 1rem;
+            background: #f9f6f2;
+        }
+
+        .trust-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .trust-item {
+            padding: 1.5rem;
+        }
+
+        .trust-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .trust-title {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .trust-desc {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Restaurants Section */
+        .restaurants {
+            padding: 4rem 1rem;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--secondary-color);
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+        .restaurants-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .restaurant-card {
+            background: #f9f6f2;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: 1px solid #e0e0e0;
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .restaurant-logo {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            padding: 1.5rem;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .restaurant-logo-text {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .restaurant-content {
+            padding: 1.5rem;
+        }
+
+        .restaurant-badge {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .restaurant-desc {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            min-height: 60px;
+        }
+
+        .btn-commander {
+            width: 100%;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .btn-commander:hover {
+            background: #6B3410;
+        }
+
+        /* Zone Map Section */
+        .zones-section {
+            padding: 4rem 1rem;
+            background: #f9f6f2;
+        }
+
+        .map-placeholder {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 400px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 1rem;
+            background: white;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.2rem;
+            background: #f9f6f2;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .faq-question:hover {
+            background: #f0ebe4;
+        }
+
+        .faq-icon {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .faq-answer {
+            padding: 1.2rem;
+            background: white;
+            color: #666;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--footer-bg);
+            color: white;
+            padding: 4rem 1rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-column a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            display: block;
+            padding: 0.3rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-icon:hover {
+            background: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* Prototype Banner */
+        .prototype-banner {
+            background: linear-gradient(90deg, var(--primary-color), #ff6b35);
+            color: white;
+            padding: 0.8rem;
+            text-align: center;
+            font-weight: 500;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .header-selector {
+                display: none;
+            }
+
+            .restaurants-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .selector-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Prototype Banner -->
+    <div class="prototype-banner">
+        ✨ Prototype d'amélioration UX - Version optimisée du site actuel
+    </div>
+
+    <!-- Top Header -->
+    <div class="top-header" style="margin-top: 45px;">
+        <div class="top-header-content">
+            <a href="#">Hubert recrute !</a> |
+            <a href="#">Responsabilité Sociétale</a>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <div class="logo-text">🚚 Hubert de la Campagne</div>
+            </a>
+            <div class="header-selector">
+                <label>Déjà 135 communes desservies :</label>
+                <select class="village-select">
+                    <option value="">-- Choisir mon village --</option>
+                    <option value="auxerre">Auxerre</option>
+                    <option value="champignelles">Champignelles</option>
+                    <option value="toucy">Toucy</option>
+                    <option value="migennes">Migennes</option>
+                    <option value="appoigny">Appoigny</option>
+                </select>
+                <button class="btn-search">
+                    🔍 Chercher
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Faites vous livrer ... même quand vous habitez à la campagne !</h1>
+        <p class="hero-subtitle">Découvrez les meilleurs restaurants livrant votre village</p>
+        
+        <div class="hero-selector">
+            <h2>Où habitez-vous ?</h2>
+            <div class="selector-group">
+                <select id="villageSelect">
+                    <option value="">Sélectionnez votre village</option>
+                    <option value="aillant-sur-milleron">Aillant sur Milleron</option>
+                    <option value="aillant-sur-tholon">Aillant sur Tholon</option>
+                    <option value="appoigny">Appoigny</option>
+                    <option value="augy">Augy</option>
+                    <option value="auxerre">Auxerre</option>
+                    <option value="bassou">Bassou</option>
+                    <option value="bazarnes">Bazarnes</option>
+                    <option value="beaumont">Beaumont</option>
+                    <option value="champignelles">Champignelles</option>
+                    <option value="toucy">Toucy</option>
+                    <!-- Plus de villages... -->
+                </select>
+            </div>
+            <button class="btn-primary" onclick="searchRestaurants()">
+                🔍 Chercher
+            </button>
+            <div class="hero-badge">
+                Votre village n'est pas encore desservi ? 
+                <a href="#">Signalez-le nous</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust-section">
+        <div class="trust-container">
+            <div class="trust-item">
+                <div class="trust-icon">🏠</div>
+                <div class="trust-title">SELECTIONNEZ VOTRE VILLAGE</div>
+                <div class="trust-desc">Nous ajoutons de nouveaux villages desservis chaque semaine</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🍔</div>
+                <div class="trust-title">Découvrez les meilleurs restaurants</div>
+                <div class="trust-desc">Livrant votre village</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🛒</div>
+                <div class="trust-title">Commandez en sécurité</div>
+                <div class="trust-desc">Paiement en ligne ou à la livraison en CB ou espèces</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">❤️</div>
+                <div class="trust-title">Soutenez le local</div>
+                <div class="trust-desc">Les restaurateurs de nos campagnes</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Restaurants Section -->
+    <section class="restaurants">
+        <h2 class="section-title">Les restaurants préférés de nos villages</h2>
+        
+        <div class="restaurants-grid">
+            <!-- BTS -->
+            <div class="restaurant-card">
+                <div class="restaurant-logo">
+                    <div class="restaurant-logo-text">BTS<br>Build To Salad</div>
+                </div>
+                <div class="restaurant-content">
+                    <div class="restaurant-badge">Plus de 1500 combinaisons</div>
+                    <p class="restaurant-desc">
+                        Vous composez intégralement votre salade sur mesure en fonction de vos envies parmi un vaste choix d'ingrédients frais et cuisinés maison
+                    </p>
+                    <button class="btn-commander">Commander</button>
+                </div>
+            </div>
+
+            <!-- CAMPAGNE -->
+            <div class="restaurant-card">
+                <div class="restaurant-logo">
+                    <div class="restaurant-logo-text">CAMPAGNE<br>Burgers</div>
+                </div>
+                <div class="restaurant-content">
+                    <div class="restaurant-badge">100% Burgers maison</div>
+                    <p class="restaurant-desc">
+                        Goûtez de vrais burgers 100% maison, très copieux, avec des ingrédients cuisinés (y compris les sauces) et des recettes très originales
+                    </p>
+                    <button class="btn-commander">Commander</button>
+                </div>
+            </div>
+
+            <!-- La Petite Pizza -->
+            <div class="restaurant-card">
+                <div class="restaurant-logo">
+                    <div class="restaurant-logo-text">La Petite Pizza</div>
+                </div>
+                <div class="restaurant-content">
+                    <div class="restaurant-badge">Des Pizzas très généreuses</div>
+                    <p class="restaurant-desc">
+                        Les pizzas les plus généreusement garnies ! Pâtes pétries à la main et garnies d'ingrédients exclusivement frais et cuisinés
+                    </p>
+                    <button class="btn-commander">Commander</button>
+                </div>
+            </div>
+
+            <!-- Table Nali -->
+            <div class="restaurant-card">
+                <div class="restaurant-logo">
+                    <div class="restaurant-logo-text">Table Nali</div>
+                </div>
+                <div class="restaurant-content">
+                    <div class="restaurant-badge">Saveurs d'Afrique</div>
+                    <p class="restaurant-desc">
+                        Découvrez la cuisine africaine au travers de notre carte gourmande et savoureuse
+                    </p>
+                    <button class="btn-commander">Commander</button>
+                </div>
+            </div>
+
+            <!-- Le Plat du Marché -->
+            <div class="restaurant-card">
+                <div class="restaurant-logo">
+                    <div class="restaurant-logo-text">Le Plat<br>du Marché</div>
+                </div>
+                <div class="restaurant-content">
+                    <div class="restaurant-badge">Chaque semaine un nouveau plat</div>
+                    <p class="restaurant-desc">
+                        Faites vous plaisir avec un plat de restaurant gastronomique à prix abordable. La cheffe compose un plat unique à base de produits de saison
+                    </p>
+                    <button class="btn-commander">Commander</button>
+                </div>
+            </div>
+
+            <!-- L'Alsacien -->
+            <div class="restaurant-card">
+                <div class="restaurant-logo">
+                    <div class="restaurant-logo-text">L'Alsacien</div>
+                </div>
+                <div class="restaurant-content">
+                    <div class="restaurant-badge">Découvrez l'Alsace</div>
+                    <p class="restaurant-desc">
+                        Des plats typiquement alsaciens notamment de délicieuses Flammenküches en format classique ou XXL
+                    </p>
+                    <button class="btn-commander">Commander</button>
+                </div>
+            </div>
+
+            <!-- Le Burger de Toucy -->
+            <div class="restaurant-card">
+                <div class="restaurant-logo">
+                    <div class="restaurant-logo-text">Le Burger<br>de Toucy</div>
+                </div>
+                <div class="restaurant-content">
+                    <div class="restaurant-badge">100% Burgers maison</div>
+                    <p class="restaurant-desc">
+                        Goûtez de vrais burgers 100% maison avec des ingrédients cuisinés et des recettes originales
+                    </p>
+                    <button class="btn-commander">Commander</button>
+                </div>
+            </div>
+
+            <!-- La Cantine de Mamie -->
+            <div class="restaurant-card">
+                <div class="restaurant-logo">
+                    <div class="restaurant-logo-text">La Cantine<br>de Mamie</div>
+                </div>
+                <div class="restaurant-content">
+                    <div class="restaurant-badge">Bons Petits Plats pour Groupes</div>
+                    <p class="restaurant-desc">
+                        Vous êtes 10 ou plus et vous voulez des bons petits plats maison ? Alors accrochez votre culotte, c'est Mamie qui pilote !
+                    </p>
+                    <button class="btn-commander">Commander</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Zones Section -->
+    <section class="zones-section">
+        <h2 class="section-title">Zones desservies par nos fiers destriers</h2>
+        <div class="map-placeholder">
+            [Carte interactive des zones de livraison]
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2 class="section-title">Hubert, j'ai une question !</h2>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    Mon village n'est pas sur la carte alors qu'il est à moins de 30km
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    Nous avons créé cette carte pour vous permettre de voir si votre village est desservi par Hubert de la Campagne. 
+                    Si votre village est à moins de 30km mais n'apparaît pas, contactez-nous au 03.86.45.22.00 ou sur notre page Facebook.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Quels sont les moyens de paiement acceptés ?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    En livraison comme en vente à emporter, vous pouvez payer en carte bleue (moyen privilégié), 
+                    en espèces, ou en tickets restaurant papier jusqu'au 31/12/2022. 
+                    Nous n'acceptons pas les chèques ni les cartes électroniques ticket restaurant.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Comment peut-on commander ?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    Vous pouvez commander sur ce site, par téléphone au 03.86.45.22.00, via notre page Facebook, 
+                    par email à jaifaim@hubertdelacampagne.com, par WhatsApp au 06.38.04.33.45, 
+                    ou directement dans nos points de vente d'Auxerre ou Champignelles.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Jusqu'à quelle heure livrez-vous ?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    En semaine, nous prenons les commandes jusqu'à 21h. Le weekend, jusqu'à 21h30 environ. 
+                    Si vous souhaitez être livré au-delà, passez commande dans la soirée en indiquant l'heure souhaitée.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Avez-vous une offre spéciale groupe ?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    Nous livrons régulièrement des groupes de 60 à 100 plats. Contactez-nous par email ou téléphone 
+                    pour un devis. Nous appliquons des remises pour les groupes. Prévenez-nous au minimum 3 jours avant.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>À Propos</h3>
+                <a href="#">Mentions Légales</a>
+                <a href="#">Conditions Générales de Vente</a>
+                <a href="#">Je veux Hubert dans ma campagne</a>
+                <a href="#">Presse</a>
+            </div>
+            <div class="footer-column">
+                <h3>Livreurs</h3>
+                <a href="#">Candidater pour devenir livreur</a>
+                <a href="#">Hubert recrute !</a>
+            </div>
+            <div class="footer-column">
+                <h3>Nous contacter</h3>
+                <p style="color: rgba(255,255,255,0.8); margin: 1rem 0;">
+                    jaifaim@hubertdelacampagne.com<br>
+                    03 86 45 22 00
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon">f</a>
+                    <a href="#" class="social-icon">📷</a>
+                    <a href="#" class="social-icon">✉</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Liberté pour les livrés</h3>
+                <p style="color: rgba(255,255,255,0.8); margin: 1rem 0;">
+                    Faites vous livrer ... même à la campagne !
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            2021 © Tous droits réservés - BeberdelaCampagne.com
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/33638043345" class="whatsapp-float" target="_blank">
+        💬
+    </a>
+
+    <script>
+        // Fonction pour rechercher les restaurants
+        function searchRestaurants() {
+            const village = document.getElementById('villageSelect').value;
+            if (village) {
+                alert(`Excellent ! Nous livrons bien votre village. Découvrez nos restaurants ci-dessous.`);
+                document.querySelector('.restaurants').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                alert('Veuillez sélectionner votre village');
+            }
+        }
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Fermer tous les autres
+                document.querySelectorAll('.faq-item').forEach(faqItem => {
+                    faqItem.classList.remove('active');
+                    faqItem.querySelector('.faq-icon').textContent = '+';
+                });
+                
+                // Ouvrir/fermer celui-ci
+                if (!isActive) {
+                    item.classList.add('active');
+                    question.querySelector('.faq-icon').textContent = '−';
+                }
+            });
+        });
+
+        // Animation des cartes au scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Appliquer l'animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.restaurant-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+
+            // Boutons commander
+            document.querySelectorAll('.btn-commander').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    alert('Redirection vers la page du restaurant pour commander...');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

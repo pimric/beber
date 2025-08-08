@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubert de la Campagne - Nouveau Prototype</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #eb2188; /* Le rose original */
+            --secondary-color: #333333;
+            --background-color: #FFFFFF;
+            --light-gray: #f4f4f4;
+            --text-color: #333333;
+            --text-light: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .main-header {
+            background: var(--background-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            font-weight: 400;
+        }
+
+        .main-nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        .btn {
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #d01070; /* Rose plus foncé pour le survol */
+            border-color: #d01070;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url('images_beber/burger_hero.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .village-search {
+            display: flex;
+            justify-content: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .village-search input {
+            flex-grow: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .village-search button {
+            border-radius: 0 5px 5px 0;
+            border: 2px solid var(--primary-color);
+        }
+
+        /* Restaurants Section */
+        .restaurants-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--secondary-color);
+        }
+
+        .restaurant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .restaurant-card-v3 {
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .restaurant-card-v3:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .card-logo {
+            height: 180px; /* Hauteur augmentée */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.4s ease;
+        }
+
+        .card-logo img {
+            max-width: 208px; /* +30% */
+            max-height: 208px; /* +30% */
+        }
+
+        .restaurant-card-v3:hover .card-logo {
+            transform: translateY(-20px);
+        }
+
+        .card-content-v3 h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .card-content-v3 p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .card-content-v3 .btn {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .restaurant-card-v3:hover .card-content-v3 .btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border: none;
+            padding: 12px 25px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #d01070;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+
+            .main-nav {
+                margin-top: 1rem;
+            }
+
+            .main-nav a {
+                margin: 0 10px;
+                font-size: 0.9rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .restaurant-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        /* Concept Section */
+        .concept-section {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .concept-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .concept-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+        }
+
+        .map-placeholder {
+            height: 450px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #666;
+            border: 2px dashed #ccc;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer p {
+            padding-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px; /* Adjust as needed */
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .footer-column a, .footer-column p {
+            color: #ccc;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-column a:hover {
+            color: var(--text-light);
+        }
+
+        .social-links a {
+            margin-right: 15px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            color: #888;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo"><img src="images_beber/500PX-LOGO-BEBER.png" alt="Logo Hubert de la Campagne" style="max-height: 50px;"></a>
+                <nav class="main-nav">
+                    <a href="#restaurants">Nos Restaurants</a>
+                    <a href="#concept">Le Concept</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#" class="btn btn-primary">Commander</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>La livraison de vos restaurants préférés, même à la campagne.</h1>
+                <p>Entrez le nom de votre village et découvrez qui livre près de chez vous.</p>
+                <div class="village-search">
+                    <input type="text" placeholder="Entrez votre village...">
+                    <button class="btn btn-primary">Trouver mon restaurant</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="restaurants" class="restaurants-section">
+        <div class="container">
+            <h2 class="section-title">Nos Restaurants Partenaires</h2>
+            <div class="restaurant-grid">
+
+                <div class="restaurant-card-v3">
+                    <div class="card-logo">
+                        <img src="images_beber/bouffetasalade.png" alt="Logo Build To Salad">
+                    </div>
+                    <div class="card-content-v3">
+                        <h3>Bouffe Ta Salade</h3>
+                        <p>Composez votre salade sur mesure avec des ingrédients frais.</p>
+                        <a href="menu-bouffetasalade.html" class="btn btn-secondary">Voir le menu</a>
+                    </div>
+                </div>
+
+                <div class="restaurant-card-v3">
+                    <div class="card-logo">
+                        <img src="images_beber/LOGO-CAMPAGNE-v5-qqf91dxh4faecol2lq3hbid95gmzfu6c15qd4qgjcw.png" alt="Logo Campagne Burgers">
+                    </div>
+                    <div class="card-content-v3">
+                        <h3>Campagne Burgers</h3>
+                        <p>Des burgers 100% maison, généreux et aux recettes originales.</p>
+                        <a href="menu-campagne-burgers.html" class="btn btn-secondary">Voir le menu</a>
+                    </div>
+                </div>
+
+                <div class="restaurant-card-v3">
+                    <div class="card-logo">
+                        <img src="images_beber/napolitaine.png" alt="Logo La Petite Pizza">
+                    </div>
+                    <div class="card-content-v3">
+                        <h3>La Petite Pizza</h3>
+                        <p>Pizzas artisanales, généreusement garnies d'ingrédients frais.</p>
+                        <a href="menu-lapetitepizza.html" class="btn btn-secondary">Voir le menu</a>
+                    </div>
+                </div>
+
+                <div class="restaurant-card-v3">
+                    <div class="card-logo">
+                        <img src="images_beber/Logo-Table-Nali-pqdakizwneu6hhgttwadkxapu9yw8zxdhj192j9rsw.png" alt="Logo Table Nali">
+                    </div>
+                    <div class="card-content-v3">
+                        <h3>Table Nali</h3>
+                        <p>Découvrez les saveurs gourmandes et savoureuses de la cuisine africaine.</p>
+                        <a href="#" class="btn btn-secondary">Voir le menu</a>
+                    </div>
+                </div>
+
+                <div class="restaurant-card-v3">
+                    <div class="card-logo">
+                        <img src="images_beber/platdumarché.png" alt="Logo Le Plat du Marché">
+                    </div>
+                    <div class="card-content-v3">
+                        <h3>Le Plat du Marché</h3>
+                        <p>Un plat de restaurant gastronomique à prix abordable, qui change chaque semaine.</p>
+                        <a href="#" class="btn btn-secondary">Voir le menu</a>
+                    </div>
+                </div>
+
+                <div class="restaurant-card-v3">
+                    <div class="card-logo">
+                        <img src="images_beber/alsacien.png" alt="Logo L'Alsacien">
+                    </div>
+                    <div class="card-content-v3">
+                        <h3>L'Alsacien</h3>
+                        <p>Des plats typiquement alsaciens, notamment de délicieuses Flammenküches.</p>
+                        <a href="#" class="btn btn-secondary">Voir le menu</a>
+                    </div>
+                </div>
+
+                <div class="restaurant-card-v3">
+                    <div class="card-logo">
+                        <img src="images_beber/Le-Burger-de-Toucy-Logo-pqdak8nok8g0xrvui9thbhwnb1duwbsbs3uwshp3pc.png" alt="Logo Le Burger de Toucy">
+                    </div>
+                    <div class="card-content-v3">
+                        <h3>Le Burger de Toucy</h3>
+                        <p>Goûtez de vrais burgers 100% maison avec des ingrédients cuisinés et des recettes originales.</p>
+                        <a href="#" class="btn btn-secondary">Voir le menu</a>
+                    </div>
+                </div>
+
+                <div class="restaurant-card-v3">
+                    <div class="card-logo">
+                        <img src="images_beber/cantinemamie.png" alt="Logo La Cantine de Mamie">
+                    </div>
+                    <div class="card-content-v3">
+                        <h3>La Cantine de Mamie</h3>
+                        <p>Pour les groupes de 10 ou plus, des bons petits plats maison comme on les aime.</p>
+                        <a href="#" class="btn btn-secondary">Voir le menu</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="concept" class="concept-section">
+        <div class="container">
+            <h2 class="section-title">Comment ça marche ?</h2>
+            <div class="concept-grid">
+                <div class="concept-item">
+                    <div class="concept-icon">📍</div>
+                    <h3>1. Trouvez votre village</h3>
+                    <p>Entrez votre code postal ou le nom de votre village pour voir les restaurants disponibles.</p>
+                </div>
+                <div class="concept-item">
+                    <div class="concept-icon">🍔</div>
+                    <h3>2. Choisissez votre menu</h3>
+                    <p>Parcourez les menus de nos partenaires et faites votre choix parmi une grande sélection de plats.</p>
+                </div>
+                <div class="concept-item">
+                    <div class="concept-icon">🚚</div>
+                    <h3>3. Faites-vous livrer</h3>
+                    <p>Recevez votre commande directement chez vous, même en pleine campagne !</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="map" class="map-section">
+        <div class="container">
+            <h2 class="section-title">Nos Zones de Livraison</h2>
+            <div class="map-placeholder">
+                <p>[Ici se trouvera la carte interactive des zones de livraison]</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Questions Fréquentes</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Mon village n'est pas listé, que faire ?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous ajoutons constamment de nouveaux villages. N'hésitez pas à nous contacter pour nous suggérer le vôtre !</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quels sont les moyens de paiement ?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous acceptons les paiements par carte bancaire, espèces et titres restaurant.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Comment puis-je suivre ma commande ?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Vous recevrez un lien de suivi par SMS dès que votre commande sera en cours de livraison.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <a href="#" class="logo"><img src="images_beber/500PX-LOGO-BEBER.png" alt="Logo Hubert de la Campagne" style="max-height: 50px;"></a>
+                    <p>La livraison de vos restaurants préférés, même à la campagne.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Navigation</h4>
+                    <a href="#restaurants">Nos Restaurants</a>
+                    <a href="#concept">Le Concept</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <p>jaifaim@hubertdelacampagne.com</p>
+                    <p>03 86 45 22 00</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="#">Facebook</a>
+                        <a href="#">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hubert de la Campagne. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', event => {
+                const faqItem = item.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+    </script>
+
+</body>
+</html>

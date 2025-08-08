@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu du Restaurant - Hubert de la Campagne</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #eb2188;
+            --secondary-color: #333333;
+            --background-color: #FFFFFF;
+            --light-gray: #f4f4f4;
+            --text-color: #333333;
+            --text-light: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .main-header {
+            background: var(--background-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            font-weight: 400;
+        }
+
+        .main-nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        .btn {
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #d01070;
+            border-color: #d01070;
+        }
+
+        /* Menu Page Specifics */
+        .restaurant-hero {
+            padding: 60px 0;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .restaurant-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0,0,0,0.6);
+        }
+
+        .restaurant-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .restaurant-logo-hero {
+            max-height: 120px;
+            margin-bottom: 20px;
+            border: 3px solid white;
+            border-radius: 50%;
+        }
+
+        .restaurant-hero h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .menu-container {
+            display: flex;
+            gap: 40px;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        .menu-items {
+            flex-grow: 1;
+        }
+
+        .menu-items h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .item-info {
+            flex-grow: 1;
+        }
+
+        .item-info h3 {
+            margin: 0 0 5px;
+            font-size: 1.3rem;
+        }
+
+        .item-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 20px;
+        }
+
+        .btn-add {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-add:hover {
+            background-color: #d01070;
+        }
+
+        .cart {
+            width: 320px;
+            flex-shrink: 0;
+            background-color: var(--light-gray);
+            padding: 20px;
+            border-radius: 10px;
+            position: sticky;
+            top: 120px;
+        }
+
+        .cart h3 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            color: #888;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 20px;
+            border-top: 2px solid #ddd;
+            padding-top: 15px;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+        }
+
+        .btn-checkout:disabled {
+            background-color: #ccc;
+            border-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-container {
+                flex-direction: column;
+            }
+
+            .cart {
+                width: 100%;
+                position: static;
+                margin-top: 2rem;
+            }
+
+            .restaurant-hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .footer-column a, .footer-column p {
+            color: #ccc;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-column a:hover {
+            color: var(--text-light);
+        }
+
+        .social-links a {
+            margin-right: 15px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="hubert-v2.html" class="logo"><img src="images_beber/500PX-LOGO-BEBER.png" alt="Logo Hubert de la Campagne" style="max-height: 50px;"></a>
+                <nav class="main-nav">
+                    <a href="hubert-v2.html#restaurants">Nos Restaurants</a>
+                    <a href="hubert-v2.html#concept">Le Concept</a>
+                    <a href="hubert-v2.html#faq">FAQ</a>
+                    <a href="#" class="btn btn-primary">Commander</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="menu-page">
+        <section class="restaurant-hero" style="background-image: url('images_beber/burger_hero.jpg');">
+            <div class="container">
+                <img src="images_beber/LOGO-CAMPAGNE-v5-qqf91dxh4faecol2lq3hbid95gmzfu6c15qd4qgjcw.png" alt="Logo Campagne Burgers" class="restaurant-logo-hero">
+                <h1>Campagne Burgers</h1>
+                <p>Des burgers 100% maison, généreux et aux recettes originales.</p>
+            </div>
+        </section>
+
+        <div class="menu-container container">
+            <div class="menu-items">
+                <h2>Nos Burgers</h2>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>Le Classique</h3>
+                        <p>Steak haché frais, cheddar, salade, tomate, oignons, sauce maison.</p>
+                    </div>
+                    <div class="item-price">12.50€</div>
+                    <div class="item-add">
+                        <button class="btn-add">+</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>Le Campagnard</h3>
+                        <p>Steak haché, fromage de chèvre, lard grillé, confit d'oignons.</p>
+                    </div>
+                    <div class="item-price">14.00€</div>
+                    <div class="item-add">
+                        <button class="btn-add">+</button>
+                    </div>
+                </div>
+
+                <h2>Accompagnements</h2>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>Frites Maison</h3>
+                        <p>Portion de frites fraîches, cuites à la perfection.</p>
+                    </div>
+                    <div class="item-price">4.00€</div>
+                    <div class="item-add">
+                        <button class="btn-add">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="cart">
+                <h3>Votre Panier</h3>
+                <div class="cart-items">
+                    <p class="cart-empty">Votre panier est vide.</p>
+                </div>
+                <div class="cart-total">
+                    <h4>Total</h4>
+                    <p>0.00€</p>
+                </div>
+                <button class="btn btn-primary btn-checkout" disabled>Valider la commande</button>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <a href="hubert-v2.html" class="logo"><img src="images_beber/500PX-LOGO-BEBER.png" alt="Logo Hubert de la Campagne" style="max-height: 50px;"></a>
+                    <p>La livraison de vos restaurants préférés, même à la campagne.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Navigation</h4>
+                    <a href="hubert-v2.html#restaurants">Nos Restaurants</a>
+                    <a href="hubert-v2.html#concept">Le Concept</a>
+                    <a href="hubert-v2.html#faq">FAQ</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <p>jaifaim@hubertdelacampagne.com</p>
+                    <p>03 86 45 22 00</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="#">Facebook</a>
+                        <a href="#">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hubert de la Campagne. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const cartItemsContainer = document.querySelector('.cart-items');
+        const cartEmptyMsg = document.querySelector('.cart-empty');
+        const cartTotal = document.querySelector('.cart-total p');
+        const checkoutBtn = document.querySelector('.btn-checkout');
+        const addButtons = document.querySelectorAll('.btn-add');
+
+        let cart = [];
+
+        addButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const menuItem = button.closest('.menu-item');
+                const name = menuItem.querySelector('h3').textContent;
+                const price = parseFloat(menuItem.querySelector('.item-price').textContent);
+
+                const existingItem = cart.find(item => item.name === name);
+
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({ name, price, quantity: 1 });
+                }
+                updateCart();
+            });
+        });
+
+        function updateCart() {
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="cart-empty">Votre panier est vide.</p>';
+                checkoutBtn.disabled = true;
+            } else {
+                cartItemsContainer.innerHTML = '';
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.innerHTML = `<span>${item.name} (x${item.quantity})</span><span>${(item.price * item.quantity).toFixed(2)}€</span>`;
+                    cartItemsContainer.appendChild(cartItem);
+                });
+                checkoutBtn.disabled = false;
+            }
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = `${total.toFixed(2)}€`;
+        }
+    </script>
+
+</body>
+</html>
