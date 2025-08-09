@@ -236,16 +236,68 @@
         /* Responsive */
         @media (max-width: 768px) {
             .header-content {
-                flex-direction: column;
+                flex-direction: row; /* Keep logo and nav on same line */
+                justify-content: space-between;
             }
 
             .main-nav {
-                margin-top: 1rem;
+                display: flex;
+                align-items: center; /* Align items to the right */
+                position: relative; /* For hamburger positioning */
+            }
+
+            .nav-links {
+                display: none; /* Hidden by default */
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--background-color);
+                position: absolute;
+                top: 60px; /* Adjust based on header height */
+                right: 0;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                padding: 10px 0;
+            }
+
+            .nav-links.active {
+                display: flex; /* Show when active */
             }
 
             .main-nav a {
-                margin: 0 10px;
-                font-size: 0.9rem;
+                margin: 10px 20px; /* Adjust spacing for vertical menu */
+                font-size: 1rem;
+            }
+
+            .btn-primary {
+                margin: 10px 20px; /* Adjust spacing for button */
+            }
+
+            .hamburger-menu {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                width: 30px;
+                height: 25px;
+                cursor: pointer;
+                z-index: 1001; /* Ensure it's above other content */
+            }
+
+            .hamburger-menu .bar {
+                width: 100%;
+                height: 3px;
+                background-color: var(--secondary-color);
+                transition: all 0.3s ease;
+            }
+
+            .hamburger-menu.active .bar:nth-child(1) {
+                transform: translateY(11px) rotate(45deg);
+            }
+
+            .hamburger-menu.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger-menu.active .bar:nth-child(3) {
+                transform: translateY(-11px) rotate(-45deg);
             }
 
             .hero-content h1 {
@@ -405,10 +457,17 @@
             <div class="header-content">
                 <a href="#" class="logo"><img src="images_beber/500PX-LOGO-BEBER.png" alt="Logo Hubert de la Campagne" style="max-height: 50px;"></a>
                 <nav class="main-nav">
-                    <a href="#restaurants">Nos Restaurants</a>
-                    <a href="#concept">Le Concept</a>
-                    <a href="#faq">FAQ</a>
                     <a href="menu/index.html" class="btn btn-primary">Commander</a>
+                    <div class="hamburger-menu">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                    <div class="nav-links">
+                        <a href="#restaurants">Nos Restaurants</a>
+                        <a href="#concept">Le Concept</a>
+                        <a href="#faq">FAQ</a>
+                    </div>
                 </nav>
             </div>
         </div>
@@ -629,6 +688,14 @@
                 const faqItem = item.parentElement;
                 faqItem.classList.toggle('active');
             });
+        });
+
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburgerMenu.addEventListener('click', () => {
+            hamburgerMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
         });
     </script>
 
