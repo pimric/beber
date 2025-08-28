@@ -56,7 +56,7 @@
             font-weight: 400;
         }
 
-        .main-nav a {
+        .nav-links a:not(.btn) {
             margin-left: 25px;
             text-decoration: none;
             color: var(--secondary-color);
@@ -64,7 +64,7 @@
             transition: color 0.3s ease;
         }
 
-        .main-nav a:hover {
+        .nav-links a:not(.btn):hover {
             color: var(--primary-color);
         }
         
@@ -301,13 +301,9 @@
                 display: flex; /* Show when active */
             }
 
-            .main-nav a {
+            .nav-links a {
                 margin: 10px 20px; /* Adjust spacing for vertical menu */
                 font-size: 1rem;
-            }
-
-            .btn-primary {
-                margin: 10px 20px; /* Adjust spacing for button */
             }
 
             .hamburger-menu {
@@ -485,13 +481,13 @@
             <div class="header-content">
                 <a href="#" class="logo"><img src="../images_beber/500PX-LOGO-BEBER.png" alt="Logo Hubert de la Campagne" style="max-height: 50px;"></a>
                 <nav class="main-nav">
-                    <a href="menu/index.html" class="btn btn-primary">Commander</a>
                     <div class="hamburger-menu">
                         <div class="bar"></div>
                         <div class="bar"></div>
                         <div class="bar"></div>
                     </div>
                     <div class="nav-links">
+                        <a href="menu/index.html" class="btn btn-primary">Commander</a>
                         <a href="#restaurants">Nos Restaurants</a>
                         <a href="#concept">Le Concept</a>
                         <a href="#faq">FAQ</a>
